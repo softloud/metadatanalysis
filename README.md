@@ -62,53 +62,19 @@ Ridgeplotdat<-Rd %>%
   filter(value==TRUE) %>%
   mutate(pkg_name=Name) %>%
   add_count(key)
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
-
-#> Warning in stri_detect_regex(string, pattern, negate = negate, opts_regex =
-#> opts(pattern)): argument is not an atomic vector; coercing
 
 Ridgeplotdat1<-inner_join(Ridgeplotdat,plotdat)
-#> Joining, by = "pkg_name"
 
 library(ggridges)
 Ridgeplotdat1 %>%
   filter(n>5) %>%
-  ggplot(aes(x = k, y = key, fill=key)) + geom_density_ridges()
-#> Picking joint bandwidth of 21.6
+  ggplot(aes(x = k, y = key, fill=key)) + geom_density_ridges()+
+  labs(title =  
+  stringr::str_wrap("Distribution of number of studies per major discipline in
+       metadat::", 40),
+       caption = paste(nrow(Ridgeplotdat1 %>%
+  filter(n>5)), "out of", nrow(md), "datasets."), y="Major discipline")+
+  ggthemes::theme_base()
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-ridge plot by main category-1.png" width="100%" />

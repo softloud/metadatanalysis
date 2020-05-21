@@ -53,7 +53,7 @@ plotdat <- md %>%
 
 ```
 
-```{r}
+```{r ridge plot by main category, warning=FALSE, message=FALSE}
 Rd<-readRDS(paste0(.libPaths()[1],"/metadat/Meta/Rd.rds"))# How do I make this generic rather than just based on my .libPaths?
 
 Ridgeplotdat<-Rd %>%
@@ -82,6 +82,12 @@ Ridgeplotdat1<-inner_join(Ridgeplotdat,plotdat)
 library(ggridges)
 Ridgeplotdat1 %>%
   filter(n>5) %>%
-  ggplot(aes(x = k, y = key, fill=key)) + geom_density_ridges()
+  ggplot(aes(x = k, y = key, fill=key)) + geom_density_ridges()+
+  labs(title =  
+  stringr::str_wrap("Distribution of number of studies per major discipline in
+       metadat::", 40),
+       caption = paste(nrow(Ridgeplotdat1 %>%
+  filter(n>5)), "out of", nrow(md), "datasets."), y="Major discipline")+
+  ggthemes::theme_base()
 ```
 
