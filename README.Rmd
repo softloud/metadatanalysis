@@ -18,3 +18,20 @@ Questions about the data contained in `metadat::`
 1. What is the distribution of sample sizes n, for each study?
 2. What is the distribution of minimum n and maximum n sample sizes?
 3. What is the distribution of k, number of studies? 
+
+```{r message=FALSE}
+# load packages
+library(metadat)
+library(tidyverse)
+library(metadatanalysis)
+
+```
+
+```{r}
+# get all the datasets
+mdat <- 
+  get_metadata()
+
+mdat %>% head()
+```
+

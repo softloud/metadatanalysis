@@ -13,6 +13,7 @@ library(tidyverse)
 
 # get all dataset names
 dat_metadata <- data(package = "metadat")
+
 dataset_names <-
   dat_metadata %>%
   pluck("results") %>%
@@ -20,15 +21,13 @@ dataset_names <-
   pluck("Item") %>%
   as.character()
 
-
-
 dat <-
   tibble(
-  pkg_name = dataset_names
+  dataset_name = dataset_names
 ) %>%
   mutate(
     # get datasets into a tibble
-    raw_dat = map(pkg_name, function(x){get(x)}),
+    raw_dat = map(dataset_name, function(x){get(x)}),
     # identify class of each dataset
     class = map(raw_dat, class),
     # get the column names (variables) of data
