@@ -13,11 +13,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-Questions about the data contained in `metadat::`
-
-1. What is the distribution of sample sizes n, for each study?
-2. What is the distribution of minimum n and maximum n sample sizes?
-3. What is the distribution of k, number of studies? 
 
 ```{r message=FALSE}
 # load packages
@@ -27,11 +22,32 @@ library(metadatanalysis)
 
 ```
 
-```{r}
-# get all the datasets
-mdat <- 
-  get_metadata()
 
-mdat %>% head()
+Questions to answer about the data contained in `metadat::`
+
+1. What is the distribution of sample sizes n, for each study?
+2. What is the distribution of minimum n and maximum n sample sizes?
+3. What is the distribution of k, number of studies? 
+
+## distribution of k
+
+```{r}
+
+# distribution of k, number of studies
+plotdat <- get_metadata() %>% 
+  dplyr::filter(class != "phylo") %>% 
+  mutate(k = map(raw_dat, get_k), 
+         row_n = map_int(raw_dat, nrow)) %>% 
+  dplyr::filter(k != "no study id") %>% 
+  mutate(k = as.integer(k))  
+
+# plot k
+  plotdat %>% 
+    ggplot(aes(x = k)) +
+  geom_density() +
+  labs(title =  stringr::str_wrap("Distribution of number of studies in datasets in 
+       metadat::", 80),
+       caption = paste(nrow(plotdat), "out of 64 datasets"))
+
 ```
 
