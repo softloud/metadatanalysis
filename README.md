@@ -17,9 +17,10 @@ Questions to answer about the data contained in `metadat::`
 ## distribution of k
 
 ``` r
+md <- get_metadata()
 
 # distribution of k, number of studies
-plotdat <- get_metadata() %>% 
+plotdat <- md %>% 
   dplyr::filter(class != "phylo") %>% 
   mutate(k = map(raw_dat, get_k), 
          row_n = map_int(raw_dat, nrow)) %>% 
@@ -30,9 +31,10 @@ plotdat <- get_metadata() %>%
   plotdat %>% 
     ggplot(aes(x = k)) +
   geom_density() +
-  labs(title =  stringr::str_wrap("Distribution of number of studies in datasets in 
+  labs(title =  
+  stringr::str_wrap("Distribution of number of studies in datasets in 
        metadat::", 80),
-       caption = paste(nrow(plotdat), "out of 64 datasets"))
+       caption = paste(nrow(plotdat), "out of", nrow(md), "datasets."))
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
