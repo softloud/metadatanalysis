@@ -2,13 +2,16 @@
 % Please edit documentation in R/get_k.R
 \name{get_k}
 \alias{get_k}
-\title{Identify if it has a study}
+\title{Return number of studies in a meta-analysis}
 \usage{
-get_k(raw_dat)
+get_k(metadatdat)
+}
+\arguments{
+\item{metadatdat}{A dataset from \link{metadat}.}
 }
 \value{
 Number of studies, k. Or "no study id" if we couldn't find one.
 }
 \description{
-Identify if it has a study
+Return number of studies in a meta-analysis
 }
