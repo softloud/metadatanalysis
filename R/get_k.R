@@ -1,12 +1,17 @@
 #' Return number of studies in a meta-analysis
 #'
 #' @param metadatdat A dataset from [metadat].
+#' @param k_var Specify which column which has studies. If unspecified,
+#' the column identifying k is found by counting unique variables in the first
+#' column matching study, study_id, studyid, reference, id, source, author,
+#' authors.
 #'
 #' @return Number of studies, k. Or "no study id" if we couldn't find one.
 #'
 #' @export
 
-get_k <- function(metadatdat) {
+get_k <- function(metadatdat, k_var = NULL) {
+  if (!is.null(k_var)) return(metadatdat %>% purrr::pluck(k_var))
 
   # possible variable names for study id
   study_flags <- c("study", "study_id", "studyid", "reference", "id", "source")

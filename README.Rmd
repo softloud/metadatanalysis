@@ -74,7 +74,7 @@ Ridgeplotdat<-Rd %>%
   dplyr::select(-Title, -Concepts) %>%
   gather(key=key, value=value, -Name) %>%
   filter(value==TRUE) %>%
-  mutate(pkg_name=Name) %>%
+  mutate(dat_name=Name) %>%
   add_count(key)
 
 Ridgeplotdat1<-inner_join(Ridgeplotdat,plotdat)
@@ -89,5 +89,18 @@ Ridgeplotdat1 %>%
        caption = paste(nrow(Ridgeplotdat1 %>%
   filter(n>5)), "out of", nrow(md), "datasets."), y="Major discipline")+
   ggthemes::theme_base()
+```
+
+# sample sizes
+
+```{r}
+
+hybrid_n <- 
+  md %>% 
+  mutate(sample_sizes = map(raw_dat, get_n)) %>% 
+  select(dat_name,sample_sizes)
+
+
+
 ```
 

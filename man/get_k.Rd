@@ -4,10 +4,15 @@
 \alias{get_k}
 \title{Return number of studies in a meta-analysis}
 \usage{
-get_k(metadatdat)
+get_k(metadatdat, k_var = NULL)
 }
 \arguments{
 \item{metadatdat}{A dataset from \link{metadat}.}
+
+\item{k_var}{Specify which column which has studies. If unspecified,
+the column identifying k is found by counting unique variables in the first
+column matching study, study_id, studyid, reference, id, source, author,
+authors.}
 }
 \value{
 Number of studies, k. Or "no study id" if we couldn't find one.

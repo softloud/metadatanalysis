@@ -26,6 +26,13 @@ plotdat <- md %>%
          row_n = map_int(raw_dat, nrow)) %>% 
   dplyr::filter(k != "no study id") %>% 
   mutate(k = as.integer(k))  
+#> Warning in mask$eval_all_mutate(dots[[i]]): NAs introduced by coercion
+
+#> Warning in mask$eval_all_mutate(dots[[i]]): NAs introduced by coercion
+
+#> Warning in mask$eval_all_mutate(dots[[i]]): NAs introduced by coercion
+
+#> Warning in mask$eval_all_mutate(dots[[i]]): NAs introduced by coercion
 
 # plot k
   plotdat %>% 
@@ -35,6 +42,7 @@ plotdat <- md %>%
   stringr::str_wrap("Distribution of number of studies in datasets in 
        metadat::", 80),
        caption = paste(nrow(plotdat), "out of", nrow(md), "datasets."))
+#> Warning: Removed 4 rows containing non-finite values (stat_density).
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
@@ -60,7 +68,7 @@ Ridgeplotdat<-Rd %>%
   dplyr::select(-Title, -Concepts) %>%
   gather(key=key, value=value, -Name) %>%
   filter(value==TRUE) %>%
-  mutate(pkg_name=Name) %>%
+  mutate(dat_name=Name) %>%
   add_count(key)
 
 Ridgeplotdat1<-inner_join(Ridgeplotdat,plotdat)
@@ -78,3 +86,13 @@ Ridgeplotdat1 %>%
 ```
 
 <img src="man/figures/README-ridge plot by main category-1.png" width="100%" />
+
+# sample sizes
+
+``` r
+
+hybrid_n <- 
+  md %>% 
+  mutate(sample_sizes = map(raw_dat, get_n)) %>% 
+  select(dat_name,sample_sizes)
+```

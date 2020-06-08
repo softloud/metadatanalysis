@@ -15,11 +15,11 @@ get_metadata <- function() {
     as.character()
 
     tibble::tibble(
-      pkg_name = dataset_names
+      dat_name = dataset_names
     ) %>%
     dplyr::mutate(
       # get datasets into a tibble
-      raw_dat = purrr::map(pkg_name, function(x){get(x)}),
+      raw_dat = purrr::map(dat_name, function(x){get(x)}),
       # identify class of each dataset
       class = purrr::map(raw_dat, class),
       # get the column names (variables) of data

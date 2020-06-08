@@ -4,10 +4,12 @@
 \alias{get_n}
 \title{Identify if it has a study}
 \usage{
-get_n(metadatdat)
+get_n(metadatdat, n_var = NULL)
 }
 \arguments{
 \item{metadatdat}{A dataset from \link{metadat}.}
+
+\item{n_var}{Specify which column which has studies.}
 }
 \value{
 Vector of sample sizes in a \link{metadat} dataset.
