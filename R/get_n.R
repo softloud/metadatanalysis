@@ -24,7 +24,7 @@ get_n <- function(metadatdat, n_var = NULL) {
 
   # if no study variable found
   if (!any(keys %in% names(dat)))
-    return("no n id found")
+    return("no n column found")
 
   # select *first* column that matchs
   # this might bite us in the arse later

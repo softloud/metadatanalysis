@@ -93,6 +93,19 @@ Ridgeplotdat1 %>%
 
 hybrid_n <- 
   md %>% 
-  mutate(sample_sizes = map(raw_dat, get_n)) %>% 
-  select(dat_name,sample_sizes)
+  mutate(sample_size = map(raw_dat, get_n)) %>% 
+  select(dat_name,sample_size) %>% 
+  mutate(class = map_chr(sample_size, class)) %>% 
+  dplyr::filter(class == "numeric") %>% 
+  select(-class) 
+
+long_n <-
+  hybrid_n %>% 
+  unnest(cols = c(sample_size))
+
+# why does this not plot? need to investigate further
+
+# long_n %>% 
+#   ggplot(x = sample_size, y = dat_name) +
+#   geom_density_ridges()
 ```
