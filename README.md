@@ -103,9 +103,25 @@ long_n <-
   hybrid_n %>% 
   unnest(cols = c(sample_size))
 
+
+
 # why does this not plot? need to investigate further
 
-# long_n %>% 
-#   ggplot(x = sample_size, y = dat_name) +
-#   geom_density_ridges()
+long_n %>%
+  ggplot(aes(x = log(sample_size), y = dat_name)) +
+  geom_density_ridges(
+    colour = "grey",
+    fill = "grey",
+    alpha = 0.4
+  ) +
+  labs(
+    title = "Distributions of sample sizes in metadat:: datasets",
+    y = "metadat:: dataset",
+    x = "log(sample size)",
+    caption = paste0(nrow(hybrid_n), " out of ", nrow(md), " datasets in the metadat:: package.")
+  )
+#> Picking joint bandwidth of 0.343
+#> Warning: Removed 12 rows containing non-finite values (stat_density_ridges).
 ```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
