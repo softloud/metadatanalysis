@@ -37,12 +37,13 @@ plotdat <- md %>%
 # plot k
   plotdat %>% 
     ggplot(aes(x = k)) +
-  geom_density() +
+  geom_histogram(alpha = 0.7) +
   labs(title =  
   stringr::str_wrap("Distribution of number of studies in datasets in 
        metadat::", 80),
        caption = paste(nrow(plotdat), "out of", nrow(md), "datasets."))
-#> Warning: Removed 4 rows containing non-finite values (stat_density).
+#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+#> Warning: Removed 4 rows containing non-finite values (stat_bin).
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
