@@ -49,30 +49,9 @@ plotdat <- md %>%
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 ``` r
-Rd<-readRDS(paste0(.libPaths()[1],"/metadat/Meta/Rd.rds"))# How do I make this generic rather than just based on my .libPaths?
 
-Ridgeplotdat<-Rd %>%
-  select(c(Name,Title, Concepts)) %>%
-  mutate(Medicine= str_detect(Concepts, "medicine")) %>%
-  mutate(Education= str_detect(Concepts, "eductaion")) %>%
-  mutate(Psychology= str_detect(Concepts, "psychology")) %>%
-  mutate(Infants= str_detect(Concepts, "infants")) %>%
-  mutate(Oncology= str_detect(Concepts, "oncology")) %>%
-  mutate(Dentistry= str_detect(Concepts, "densitry")) %>%
-  mutate(Ecology= str_detect(Concepts, "ecology")) %>%
-  mutate(Evolution= str_detect(Concepts, "evolution")) %>%
-  mutate(Psychiatry= str_detect(Concepts, "psychiatry")) %>%
-  mutate(Phylogeny= str_detect(Concepts, "phylogeny")) %>%
-  mutate(Sociology= str_detect(Concepts, "sociology")) %>%
-  mutate(Plant= str_detect(Concepts, "plant")) %>%
-  mutate(Cardiology= str_detect(Concepts, "cardiology")) %>%
-  dplyr::select(-Title, -Concepts) %>%
-  gather(key=key, value=value, -Name) %>%
-  filter(value==TRUE) %>%
-  mutate(dat_name=Name) %>%
-  add_count(key)
 
-Ridgeplotdat1<-inner_join(Ridgeplotdat,plotdat)
+Ridgeplotdat1<-inner_join(meta_of_dat,plotdat)
 
 library(ggridges)
 Ridgeplotdat1 %>%
